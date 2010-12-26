@@ -1,13 +1,13 @@
 package emotiometer.control;
 public class Constant 
 {
-	int RESULTAT_NOTHING = 0;
+	final int RESULTAT_NOTHING = 0;
 	//om tweetet inte innehåller någon emoticon//
-	int RESULTAT_POSITIVE = 1;
+	final int RESULTAT_POSITIVE = 1;
 	//den innehåller en positiv//
-	int RESULTAT_NEGATIVE = 2;
+	final int RESULTAT_NEGATIVE = 2;
 	//den innehåller en negativ//
-	int RESULTAT_BOTH = 3;
+	final int RESULTAT_BOTH = 3;
 	//den innehåller båda//
 	
 	static String[] Positive = { ":)", ":-)", ":]", "=)", ":-D", ":D", "=D", ";-)", ";)", ":-P", ":P", ":-p", ":p", "=P", "=>", ":>", ":->", "8-)", "8)", "8D", "8-D", "8-)", };
