@@ -30,6 +30,7 @@ public class Main extends JFrame implements StatusListener {
 	//Two strings added, AL 23/12
 	private String tweetContents;
 	private String constantProd;
+	private String tweetLowerCase;
 
 	/**
 	 * Launch the application.
@@ -178,7 +179,11 @@ public class Main extends JFrame implements StatusListener {
 			/*Adding the contents of the tweet to the String tweetContents.
 			We can compare contents within this String to what we will load into the Constant class. AL 23/12*/
 			tweetContents = arg0.getText();
-			System.out.println(tweetContents);
+			/*Here I convert the contents of the Tweet to be all lower case.
+			 * This means that the tweet can contain Tron Legacy with whatever CaSe
+			 * it should still pick up compared to prodName1 in the Constant class*/
+			tweetLowerCase = tweetContents.toLowerCase();
+			System.out.println(tweetLowerCase);
 			checkTweetProd();
 			
 			
@@ -198,27 +203,17 @@ public void checkTweetProd(){
 	//Adding to get the value from Constant in here, instanatiated one instance of the class Constant. AL 23/12
 	Constant mainConstant = new Constant();
 	String constantProd1 = mainConstant.prodName1;
-	String constantProd2 = mainConstant.prodName2;
-	String constantProd3 = mainConstant.prodName3;
-	int index1 = tweetContents.indexOf(constantProd1);
-	int index2 = tweetContents.indexOf(constantProd2);
-	int index3 = tweetContents.indexOf(constantProd3);
+	
+	int index1 = tweetLowerCase.indexOf(constantProd1);
+	
 	
 	
 	if(index1 != -1){
-	System.out.println("true");
-	
-} else if(index2 != -1){
-	System.out.println("true");
-	
-}
-	
-else if(index3 != -1){
-		System.out.println("true");
-	}
+	System.out.println("xtrue");
+		}
 
 else {
-	System.out.println("false");
+	System.out.println("xfalse");
 	}
 	
 

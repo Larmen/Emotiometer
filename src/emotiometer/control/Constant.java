@@ -1,9 +1,8 @@
 package emotiometer.control;
 public class Constant 
 {
-	public String prodName1 = "Tron Legacy";
-	public String prodName2 = "TRON LEGACY";
-	public String prodName3 = "tron legacy";
+	
+	public String prodName1 = "tron legacy";
 	
 	
 	final int RESULTAT_NOTHING = 0;
