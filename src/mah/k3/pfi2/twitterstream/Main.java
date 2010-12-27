@@ -31,6 +31,7 @@ public class Main extends JFrame implements StatusListener {
 	private String tweetContents;
 	private String constantProd;
 	private String tweetLowerCase;
+	public Constant mainConstant = new Constant();
 
 	/**
 	 * Launch the application.
@@ -183,9 +184,29 @@ public class Main extends JFrame implements StatusListener {
 			 * This means that the tweet can contain Tron Legacy with whatever CaSe
 			 * it should still pick up compared to prodName1 in the Constant class*/
 			tweetLowerCase = tweetContents.toLowerCase();
-			System.out.println(tweetLowerCase);
+			
+			System.out.println(tweetLowerCase); //Good for copying and pasting when testing
 			checkTweetProd();
 			
+			/*
+			 * Two for loops that probably should be moved into the Constant class. 
+			 * We can have the instance mainConstant run the method from within its class instead I guess,
+			 * I just didn't want to screw up anything of the Constant class teams work.
+			 * 
+			 * */
+			for(int i = 0; i < mainConstant.Positive.length; i++){
+				int indexHappyEmoticon = tweetContents.indexOf(mainConstant.Positive[i]);
+				if(indexHappyEmoticon != -1){
+					System.out.println("glad emoticon funnen");
+				}
+				
+			}
+			for(int i = 0; i < mainConstant.Negative.length; i++){
+				int indexSadEmoticon = tweetContents.indexOf(mainConstant.Negative[i]);
+				if(indexSadEmoticon != -1){
+					System.out.println("suris emoticon funnen");
+				}
+			}
 			
 		}
 		getStreamPanel().getTextArea().append(sb.toString());
@@ -201,10 +222,10 @@ public class Main extends JFrame implements StatusListener {
 public void checkTweetProd(){
 	
 	//Adding to get the value from Constant in here, instanatiated one instance of the class Constant. AL 23/12
-	Constant mainConstant = new Constant();
-	String constantProd1 = mainConstant.prodName1;
 	
-	int index1 = tweetLowerCase.indexOf(constantProd1);
+	String constantProd = mainConstant.prodName1;
+	
+	int index1 = tweetLowerCase.indexOf(constantProd);
 	
 	
 	
