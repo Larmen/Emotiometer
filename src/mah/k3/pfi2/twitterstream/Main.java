@@ -10,6 +10,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
 import emotiometer.control.Constant;
+import emotiometer.control.Counter;
 
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
@@ -32,6 +33,7 @@ public class Main extends JFrame implements StatusListener {
 	private String constantProd;
 	private String tweetLowerCase;
 	public Constant mainConstant = new Constant();
+	public Counter mainCounter = new Counter();
 
 	/**
 	 * Launch the application.
@@ -173,10 +175,14 @@ public class Main extends JFrame implements StatusListener {
 
 	@Override
 	public void onStatus(Status arg0) {
+		
+		
 		/* Read the message and append it to the JTextArea */
 		StringBuilder sb = new StringBuilder();
-		//if (arg0.getUser().getLang().equals("en")) {
+
 			sb.append(arg0.getUser().getName() + " " + arg0.getText() + "\n");
+			
+			mainCounter.plusTotalCounter();
 			/*Adding the contents of the tweet to the String tweetContents.
 			We can compare contents within this String to what we will load into the Constant class. AL 23/12*/
 			tweetContents = arg0.getText();
@@ -186,6 +192,7 @@ public class Main extends JFrame implements StatusListener {
 			tweetLowerCase = tweetContents.toLowerCase();
 			
 			System.out.println(tweetLowerCase); //Good for copying and pasting when testing
+			
 			checkTweetProd();
 			
 			/*
@@ -194,21 +201,9 @@ public class Main extends JFrame implements StatusListener {
 			 * I just didn't want to screw up anything of the Constant class teams work. AL 27/12
 			 * 
 			 * */
-			for(int i = 0; i < mainConstant.Positive.length; i++){
-				int indexHappyEmoticon = tweetContents.indexOf(mainConstant.Positive[i]);
-				if(indexHappyEmoticon != -1){
-					System.out.println("glad emoticon funnen");
-				}
-				
-			}
-			for(int i = 0; i < mainConstant.Negative.length; i++){
-				int indexSadEmoticon = tweetContents.indexOf(mainConstant.Negative[i]);
-				if(indexSadEmoticon != -1){
-					System.out.println("suris emoticon funnen");
-				}
-			}
 			
-		//}
+			
+	
 		getStreamPanel().getTextArea().append(sb.toString());
 	}
 
@@ -229,15 +224,46 @@ public void checkTweetProd(){
 	String constantProd = mainConstant.prodName1;
 	
 	int index1 = tweetLowerCase.indexOf(constantProd);
+	/*
+	 * This is the index with which we check if the product name is in the tweet
+	 * */
 	
 	
 	
 	if(index1 != -1){
-	System.out.println("xtrue");
+		
+		mainCounter.plusProductCounter();
+		
+		for(int i = 0; i < mainConstant.Positive.length; i++){
+			int indexHappyEmoticon = tweetContents.indexOf(mainConstant.Positive[i]);
+			if(indexHappyEmoticon != -1){
+				System.out.println("glad emoticon funnen");
+				mainCounter.plusPositiveCounter();
+			}
+			
+		}
+		for(int i = 0; i < mainConstant.Negative.length; i++){
+			int indexSadEmoticon = tweetContents.indexOf(mainConstant.Negative[i]);
+			if(indexSadEmoticon != -1){
+				System.out.println("suris emoticon funnen");
+				mainCounter.plusNegativeCounter();
+			}
+		}
+		
+	System.out.println("Positive " + mainCounter.getPositiveCounter());
+	System.out.println("Negative " + mainCounter.getNegativeCounter());
+	System.out.println("Product " + mainCounter.getProductCounter());
+	System.out.println("Product " + mainCounter.getTotalCounter());
+	
 		}
 
 else {
 	System.out.println("xfalse");
+	System.out.println("Positive " + mainCounter.getPositiveCounter());
+	System.out.println("Negative " + mainCounter.getNegativeCounter());
+	System.out.println("Product " + mainCounter.getProductCounter());
+	System.out.println("Total " + mainCounter.getTotalCounter());
+	
 	}
 	
 
