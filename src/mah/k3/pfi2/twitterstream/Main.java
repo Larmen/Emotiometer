@@ -175,7 +175,7 @@ public class Main extends JFrame implements StatusListener {
 	public void onStatus(Status arg0) {
 		/* Read the message and append it to the JTextArea */
 		StringBuilder sb = new StringBuilder();
-		if (arg0.getUser().getLang().equals("en")) {
+		//if (arg0.getUser().getLang().equals("en")) {
 			sb.append(arg0.getUser().getName() + " " + arg0.getText() + "\n");
 			/*Adding the contents of the tweet to the String tweetContents.
 			We can compare contents within this String to what we will load into the Constant class. AL 23/12*/
@@ -191,7 +191,7 @@ public class Main extends JFrame implements StatusListener {
 			/*
 			 * Two for loops that probably should be moved into the Constant class. 
 			 * We can have the instance mainConstant run the method from within its class instead I guess,
-			 * I just didn't want to screw up anything of the Constant class teams work.
+			 * I just didn't want to screw up anything of the Constant class teams work. AL 27/12
 			 * 
 			 * */
 			for(int i = 0; i < mainConstant.Positive.length; i++){
@@ -208,7 +208,7 @@ public class Main extends JFrame implements StatusListener {
 				}
 			}
 			
-		}
+		//}
 		getStreamPanel().getTextArea().append(sb.toString());
 	}
 
@@ -221,7 +221,10 @@ public class Main extends JFrame implements StatusListener {
 	 * We'll have to do a workaround to get the Constant-variable in here though*/
 public void checkTweetProd(){
 	
-	//Adding to get the value from Constant in here, instanatiated one instance of the class Constant. AL 23/12
+	/*
+	 * Adding to get the value from Constant in here, 
+	 * instantiated one instance of the class Constant at the top (mainConstant). AL 23/12
+	*/
 	
 	String constantProd = mainConstant.prodName1;
 	
