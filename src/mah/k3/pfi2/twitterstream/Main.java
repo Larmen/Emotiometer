@@ -9,6 +9,8 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
+import emotiometer.control.Constant;
+
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
 import twitter4j.StatusListener;
@@ -25,6 +27,9 @@ public class Main extends JFrame implements StatusListener {
 	private JPanel contentPane;
 	private StreamPanel streamPanel;
 	private LoginPanel loginPanel;
+	//Two strings added, AL 23/12
+	private String tweetContents;
+	private String constantProd;
 
 	/**
 	 * Launch the application.
@@ -54,6 +59,9 @@ public class Main extends JFrame implements StatusListener {
 		setContentPane(contentPane);
 
 		streamPanel = new StreamPanel();
+		
+		
+		
 
 		loginPanel = new LoginPanel();
 		loginPanel.getPasswordField().addActionListener(new ActionListener() {
@@ -167,6 +175,13 @@ public class Main extends JFrame implements StatusListener {
 		StringBuilder sb = new StringBuilder();
 		if (arg0.getUser().getLang().equals("en")) {
 			sb.append(arg0.getUser().getName() + " " + arg0.getText() + "\n");
+			/*Adding the contents of the tweet to the String tweetContents.
+			We can compare contents within this String to what we will load into the Constant class. AL 23/12*/
+			tweetContents = arg0.getText();
+			System.out.println(tweetContents);
+			checkTweetProd();
+			
+			
 		}
 		getStreamPanel().getTextArea().append(sb.toString());
 	}
@@ -176,5 +191,37 @@ public class Main extends JFrame implements StatusListener {
 		// TODO Auto-generated method stub
 
 	}
+	/*Added to check if tweets contain the Prodnames defined in the Constant class.
+	 * We'll have to do a workaround to get the Constant-variable in here though*/
+public void checkTweetProd(){
+	
+	//Adding to get the value from Constant in here, instanatiated one instance of the class Constant. AL 23/12
+	Constant mainConstant = new Constant();
+	String constantProd1 = mainConstant.prodName1;
+	String constantProd2 = mainConstant.prodName2;
+	String constantProd3 = mainConstant.prodName3;
+	int index1 = tweetContents.indexOf(constantProd1);
+	int index2 = tweetContents.indexOf(constantProd2);
+	int index3 = tweetContents.indexOf(constantProd3);
+	
+	
+	if(index1 != -1){
+	System.out.println("true");
+	
+} else if(index2 != -1){
+	System.out.println("true");
+	
+}
+	
+else if(index3 != -1){
+		System.out.println("true");
+	}
+
+else {
+	System.out.println("false");
+	}
+	
+
+}
 
 }
