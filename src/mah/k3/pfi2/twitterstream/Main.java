@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import emotiometer.control.Constant;
 import emotiometer.control.Counter;
+import emotiometer.control.DateUtils;
 
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
@@ -34,6 +35,8 @@ public class Main extends JFrame implements StatusListener {
 	private String tweetLowerCase;
 	public Constant mainConstant = new Constant();
 	public Counter mainCounter = new Counter();
+	public DateUtils dateUtil = new DateUtils();
+	private String dateTime;
 
 	/**
 	 * Launch the application.
@@ -76,6 +79,7 @@ public class Main extends JFrame implements StatusListener {
 		loginPanel.getButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				readTweets();
+				
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -133,6 +137,14 @@ public class Main extends JFrame implements StatusListener {
 
 		/* Start reading the Twitter Stream */
 		mTwitterStream.sample();
+		
+		/*
+		 * Sets the value for String dateTime to the date and time when the stream starts to be read. AL 2/1
+		 * 
+		 * */
+		
+		dateTime = dateUtil.now();
+		
 
 		/* Disable the login UI */
 		loginPanel.getButton().setEnabled(false);
@@ -191,6 +203,7 @@ public class Main extends JFrame implements StatusListener {
 			 * it should still pick up compared to prodName1 in the Constant class*/
 			tweetLowerCase = tweetContents.toLowerCase();
 			
+			System.out.println(dateTime);
 			System.out.println(tweetLowerCase); //Good for copying and pasting when testing
 			
 			checkTweetProd();
@@ -212,6 +225,8 @@ public class Main extends JFrame implements StatusListener {
 		// TODO Auto-generated method stub
 
 	}
+	
+	
 	/*Added to check if tweets contain the Prodnames defined in the Constant class.
 	 * We'll have to do a workaround to get the Constant-variable in here though*/
 public void checkTweetProd(){
@@ -253,7 +268,7 @@ public void checkTweetProd(){
 	System.out.println("Positive " + mainCounter.getPositiveCounter());
 	System.out.println("Negative " + mainCounter.getNegativeCounter());
 	System.out.println("Product " + mainCounter.getProductCounter());
-	System.out.println("Product " + mainCounter.getTotalCounter());
+	System.out.println("Total " + mainCounter.getTotalCounter());
 	
 		}
 
@@ -268,5 +283,4 @@ else {
 	
 
 }
-
 }

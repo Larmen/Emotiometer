@@ -12,6 +12,8 @@ public class Constant
 	public static String[] Negative = { ":-(", ":(", ":[", "=(", ">:(", ">:-(", ">:O", ">:-O", ">:o", ">:-o", "=<", ":<", ":-<", "8-(", "8-/", "8/", "=/", " :/ ", ":-/", };
 	//arrayNegative,frown,grumpy,upset// 
 	
+	
+	
 }
 
 
