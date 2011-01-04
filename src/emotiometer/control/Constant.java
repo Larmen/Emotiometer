@@ -2,7 +2,7 @@ package emotiometer.control;
 public class Constant 
 {
 	
-	public String prodName1 = "tron legacy";
+	public String prodName1 = "and";
 	
 	
 	

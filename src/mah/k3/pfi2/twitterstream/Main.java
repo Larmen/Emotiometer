@@ -23,12 +23,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JTextPane;
 
 @SuppressWarnings("serial")
 public class Main extends JFrame implements StatusListener {
 
 	private JPanel contentPane;
 	private StreamPanel streamPanel;
+	private TotalPanel totalPanel;
 	private LoginPanel loginPanel;
 	//Two strings added, AL 23/12
 	private String tweetContents;
@@ -38,6 +40,16 @@ public class Main extends JFrame implements StatusListener {
 	public Counter mainCounter = new Counter();
 	public DateUtils dateUtil = new DateUtils();
 	private String dateTime;
+	private boolean running = true;
+	
+	/*For the panels, Strings made out of integers.
+	 * AL 4/1
+	 * */
+	private int totalTweetInt;
+	public String totalTweets;
+	
+	
+	
 	/**
 	 * @wbp.nonvisual location=412,329
 	 */
@@ -98,7 +110,23 @@ public class Main extends JFrame implements StatusListener {
 		
 		ProductPanel productPanel = new ProductPanel();
 		
+		/*
+		 * Below is the start & stop function for the tweet stream.
+		 * The button just controls one boolean, which in turn sets the result
+		 * of the method onStatus further below. AL 4/1
+		 * */
 		JButton btnStartStop = new JButton("START / STOP");
+		btnStartStop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(running == false){
+					running = true;
+				}else if(running == true){
+					running = false;
+				}
+				dateTime = dateUtil.now();
+				/*This updates the date & time to reflect when the stream has been started/stopped. AL 4/1*/
+			}
+		});
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -164,8 +192,13 @@ public class Main extends JFrame implements StatusListener {
 						new String(getLoginPanel().getPasswordField()
 								.getPassword()));
 
-		/* Start reading the Twitter Stream */
+		/* Start reading the Twitter Stream 
+		 * This value is supposed to be changed with the button in the bottom of our JFrame.
+		 * */
+	
 		mTwitterStream.sample();
+	
+		
 		
 		/*
 		 * Sets the value for String dateTime to the date and time when the stream starts to be read. AL 2/1
@@ -189,6 +222,10 @@ public class Main extends JFrame implements StatusListener {
 	 */
 	protected StreamPanel getStreamPanel() {
 		return streamPanel;
+	}
+	
+	protected TotalPanel getTotalPanel(){
+		return totalPanel;
 	}
 
 	/**
@@ -216,8 +253,9 @@ public class Main extends JFrame implements StatusListener {
 
 	@Override
 	public void onStatus(Status arg0) {
-		
-		
+		/*The result of this method is dependent on what the boolean running is set to.
+		 * If false, nothing happens. AL 4/1 */
+		if(running == true){
 		/* Read the message and append it to the JTextArea */
 		StringBuilder sb = new StringBuilder();
 
@@ -235,20 +273,25 @@ public class Main extends JFrame implements StatusListener {
 			System.out.println(dateTime);
 			System.out.println(tweetLowerCase); //Good for copying and pasting when testing
 			
+			
+			//Counting test, casting the integer to String
+			totalTweetInt = mainCounter.getTotalCounter();
+			totalTweets = String.valueOf(totalTweetInt);
+			
+			
 			checkTweetProd();
 			
-			/*
-			 * Two for loops that probably should be moved into the Constant class. 
-			 * We can have the instance mainConstant run the method from within its class instead I guess,
-			 * I just didn't want to screw up anything of the Constant class teams work. AL 27/12
-			 * 
-			 * */
+			
 			
 			
 	
 		getStreamPanel().getTextArea().append(sb.toString());
+		/*getTotalPanel().getTextTotal().append(totalTweets.toString());
+		 * 
+		 * This doesn't work, I get a Thread exception error. AL 4/1
+		 * */
 	}
-
+	}
 	@Override
 	public void onTrackLimitationNotice(int arg0) {
 		// TODO Auto-generated method stub
@@ -281,7 +324,7 @@ public void checkTweetProd(){
 		for(int i = 0; i < mainConstant.Positive.length; i++){
 			int indexHappyEmoticon = tweetContents.indexOf(mainConstant.Positive[i]);
 			if(indexHappyEmoticon != -1){
-				System.out.println("glad emoticon funnen");
+				//System.out.println("glad emoticon funnen");
 				mainCounter.plusPositiveCounter();
 			}
 			
@@ -289,7 +332,7 @@ public void checkTweetProd(){
 		for(int i = 0; i < mainConstant.Negative.length; i++){
 			int indexSadEmoticon = tweetContents.indexOf(mainConstant.Negative[i]);
 			if(indexSadEmoticon != -1){
-				System.out.println("suris emoticon funnen");
+				//System.out.println("suris emoticon funnen");
 				mainCounter.plusNegativeCounter();
 			}
 		}
@@ -299,6 +342,7 @@ public void checkTweetProd(){
 	System.out.println("Product " + mainCounter.getProductCounter());
 	System.out.println("Total " + mainCounter.getTotalCounter());
 	
+	
 		}
 
 else {
@@ -307,6 +351,7 @@ else {
 	System.out.println("Negative " + mainCounter.getNegativeCounter());
 	System.out.println("Product " + mainCounter.getProductCounter());
 	System.out.println("Total " + mainCounter.getTotalCounter());
+	
 	
 	}
 	

@@ -16,7 +16,7 @@ import javax.swing.JTextArea;
  * 
  */
 public class TotalPanel extends JPanel {
-	private JTextArea textArea;
+	private JTextArea txtrTotal;
 
 	/**
 	 * Create the panel.
@@ -28,15 +28,16 @@ public class TotalPanel extends JPanel {
 		setLayout(new GridLayout(1, 0, 0, 0));
 
 		JScrollPane scrollPane = new JScrollPane();
-		// add(scrollPane);
+		 add(scrollPane);
 
-		textArea = new JTextArea();
-		textArea.setEditable(false);
-		scrollPane.setViewportView(textArea);
+		txtrTotal = new JTextArea();
+	
+		txtrTotal.setEditable(false);
+		scrollPane.setViewportView(txtrTotal);
 
 	}
 
 	public JTextArea getTextArea() {
-		return textArea;
+		return txtrTotal;
 	}
 }
