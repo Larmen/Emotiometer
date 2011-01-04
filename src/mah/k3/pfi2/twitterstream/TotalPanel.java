@@ -28,7 +28,7 @@ public class TotalPanel extends JPanel {
 		setLayout(new GridLayout(1, 0, 0, 0));
 
 		JScrollPane scrollPane = new JScrollPane();
-		add(scrollPane);
+		// add(scrollPane);
 
 		textArea = new JTextArea();
 		textArea.setEditable(false);
