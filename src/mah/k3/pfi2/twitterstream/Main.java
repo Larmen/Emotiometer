@@ -24,6 +24,12 @@ import java.awt.event.ActionEvent;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
+import java.awt.FlowLayout;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import javax.swing.border.MatteBorder;
+import javax.swing.UIManager;
+import javax.swing.border.BevelBorder;
 
 @SuppressWarnings("serial")
 public class Main extends JFrame implements StatusListener {
@@ -47,13 +53,6 @@ public class Main extends JFrame implements StatusListener {
 	 * */
 	private int totalTweetInt;
 	public String totalTweets;
-	
-	
-	
-	/**
-	 * @wbp.nonvisual location=412,329
-	 */
-	private final GraphicPanel graphicPanel = new GraphicPanel();
 
 	/**
 	 * Launch the application.
@@ -77,7 +76,7 @@ public class Main extends JFrame implements StatusListener {
 	public Main() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 865, 747);
+		setBounds(100, 100, 785, 640);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -128,52 +127,76 @@ public class Main extends JFrame implements StatusListener {
 			}
 		});
 		
+		JButton btnAbout = new JButton("ABOUT");
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		FlowLayout flowLayout_1 = (FlowLayout) panel.getLayout();
+		flowLayout_1.setAlignment(FlowLayout.LEFT);
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(streamPanel, GroupLayout.DEFAULT_SIZE, 829, Short.MAX_VALUE)
-						.addComponent(loginPanel, GroupLayout.DEFAULT_SIZE, 829, Short.MAX_VALUE))
-					.addContainerGap())
-				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(streamPanel, GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
+						.addComponent(loginPanel, GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
+						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(44)
-							.addComponent(negativePanel, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(74)
-							.addComponent(btnStartStop)))
-					.addGap(94)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(productPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-						.addComponent(totalPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE))
-					.addGap(88)
-					.addComponent(positivePanel, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE)
-					.addGap(52))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(negativePanel, GroupLayout.PREFERRED_SIZE, 240, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(57)
+									.addComponent(btnStartStop)))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(productPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(totalPanel, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(14)
+									.addComponent(positivePanel, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
+								.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnAbout, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+									.addGap(48)))))
+					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(streamPanel, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+					.addComponent(streamPanel, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 262, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addGap(21)
+								.addComponent(productPanel, GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+								.addPreferredGap(ComponentPlacement.UNRELATED))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(btnAbout)
+								.addGap(18)))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(411)
-							.addComponent(productPanel, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-							.addGap(18))
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnStartStop)
-							.addGap(33)))
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addGap(18)))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(negativePanel, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
 						.addComponent(positivePanel, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
 						.addComponent(totalPanel, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
-					.addGap(30)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(loginPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
+		
+		GraphicPanel graphicPanel = new GraphicPanel();
+		FlowLayout flowLayout = (FlowLayout) graphicPanel.getLayout();
+		flowLayout.setAlignOnBaseline(true);
+		graphicPanel.init();
+		panel.add(graphicPanel);
 		contentPane.setLayout(gl_contentPane);
 	}
 
@@ -255,10 +278,13 @@ public class Main extends JFrame implements StatusListener {
 	public void onStatus(Status arg0) {
 		/*The result of this method is dependent on what the boolean running is set to.
 		 * If false, nothing happens. AL 4/1 */
+		
+		
 		if(running == true){
 		/* Read the message and append it to the JTextArea */
 		StringBuilder sb = new StringBuilder();
 
+		
 			sb.append(arg0.getUser().getName() + " " + arg0.getText() + "\n");
 			
 			mainCounter.plusTotalCounter();
@@ -336,6 +362,7 @@ public void checkTweetProd(){
 				mainCounter.plusNegativeCounter();
 			}
 		}
+		totalPanel.setTotalCounter(mainCounter.getTotalCounter());
 		
 	System.out.println("Positive " + mainCounter.getPositiveCounter());
 	System.out.println("Negative " + mainCounter.getNegativeCounter());

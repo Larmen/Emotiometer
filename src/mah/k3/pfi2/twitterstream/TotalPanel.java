@@ -6,6 +6,7 @@ import javax.swing.border.EtchedBorder;
 import java.awt.GridLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JLabel;
 
 /**
  * Just a simple TextArea widget. The textarea by itself doesn't allow for
@@ -16,7 +17,7 @@ import javax.swing.JTextArea;
  * 
  */
 public class TotalPanel extends JPanel {
-	private JTextArea txtrTotal;
+	private JLabel totalCounter;
 
 	/**
 	 * Create the panel.
@@ -26,18 +27,28 @@ public class TotalPanel extends JPanel {
 				null), "Total Tweets:", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
 		setLayout(new GridLayout(1, 0, 0, 0));
-
-		JScrollPane scrollPane = new JScrollPane();
-		 add(scrollPane);
-
-		txtrTotal = new JTextArea();
-	
-		txtrTotal.setEditable(false);
-		scrollPane.setViewportView(txtrTotal);
+		
+		totalCounter = new JLabel("");
+		add(totalCounter);
 
 	}
 
-	public JTextArea getTextArea() {
+	/*public JTextArea getTextArea() {
 		return txtrTotal;
+	}*/
+
+	/*
+	public void changeValue(int i) {
+		// TODO Auto-generated method stub
+		txtrTotal.append("nytt värde" + i);
+	}
+	*/
+
+	public void setTotalCounter(int totalCounter) {
+		// TODO Auto-generated method stub
+		this.totalCounter.setText(""+totalCounter);
+	}
+	public JLabel getLabel() {
+		return totalCounter;
 	}
 }
