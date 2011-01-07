@@ -1,11 +1,11 @@
 package mah.k3.pfi2.twitterstream;
 
-import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.EtchedBorder;
 import java.awt.GridLayout;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 /**
  * Just a simple TextArea widget. The textarea by itself doesn't allow for
@@ -16,27 +16,36 @@ import javax.swing.JTextArea;
  * 
  */
 public class NegativePanel extends JPanel {
-	private JTextArea textArea;
+	private JLabel negativeCounter;
 
 	/**
 	 * Create the panel.
 	 */
 	public NegativePanel() {
 		setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null,
-				null), "Negative Tweets found:", TitledBorder.LEADING,
+				null), "Negative Tweets:", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
 		setLayout(new GridLayout(1, 0, 0, 0));
-
-		JScrollPane scrollPane = new JScrollPane();
-		// add(scrollPane);
-
-		textArea = new JTextArea();
-		textArea.setEditable(false);
-		scrollPane.setViewportView(textArea);
+		
+		negativeCounter = new JLabel("...");
+		add(negativeCounter);
 
 	}
 
-	public JTextArea getTextArea() {
-		return textArea;
+	/*
+	public void changeValue(int i) {
+		// TODO Auto-generated method stub
+		txtrTotal.append("nytt värde" + i);
+	}
+	*/
+
+	public void setNegativeCounter(int negativeCounter) {
+		// TODO Auto-generated method stub
+		this.negativeCounter.setText(""+negativeCounter);
+	}
+	
+	public JLabel getLabel() {
+		return negativeCounter;
 	}
 }
+

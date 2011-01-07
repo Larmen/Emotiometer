@@ -122,7 +122,7 @@ public class GraphicPanel extends PApplet {
 			fill(c);
 			rectMode(CENTER);
 			rect(xpos, ypos, 1, 32);
-			println(smiley + "smiley" + frowny + "frowny");
+			//println(smiley + "smiley" + frowny + "frowny");
 		}
 
 	}
@@ -136,4 +136,12 @@ public class GraphicPanel extends PApplet {
 		}
 	}
 
+	public void setFrowny(int frowny) {
+		this.frowny = frowny;
+	}
+	
+	public void setSmiley(int smiley) {
+		this.smiley = smiley;
+	}
+	
 	}

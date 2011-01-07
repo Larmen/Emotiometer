@@ -6,6 +6,7 @@ import javax.swing.border.EtchedBorder;
 import java.awt.GridLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 
 /**
  * Just a simple TextArea widget. The textarea by itself doesn't allow for
@@ -28,6 +29,8 @@ public class StreamPanel extends JPanel {
 		setLayout(new GridLayout(1, 0, 0, 0));
 
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		add(scrollPane);
 
 		textArea = new JTextArea();

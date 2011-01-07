@@ -1,11 +1,11 @@
 package mah.k3.pfi2.twitterstream;
 
-import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.EtchedBorder;
 import java.awt.GridLayout;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 /**
  * Just a simple TextArea widget. The textarea by itself doesn't allow for
@@ -16,27 +16,36 @@ import javax.swing.JTextArea;
  * 
  */
 public class ProductPanel extends JPanel {
-	private JTextArea textArea;
+	private JLabel productCounter;
 
 	/**
 	 * Create the panel.
 	 */
 	public ProductPanel() {
 		setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null,
-				null), "Matches found:", TitledBorder.LEADING,
+				null), "Product Hits:", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
 		setLayout(new GridLayout(1, 0, 0, 0));
-
-		JScrollPane scrollPane = new JScrollPane();
-		// add(scrollPane);
-
-		textArea = new JTextArea();
-		textArea.setEditable(false);
-		scrollPane.setViewportView(textArea);
+		
+		productCounter = new JLabel("...");
+		add(productCounter);
 
 	}
 
-	public JTextArea getTextArea() {
-		return textArea;
+	/*
+	public void changeValue(int i) {
+		// TODO Auto-generated method stub
+		txtrTotal.append("nytt värde" + i);
+	}
+	*/
+
+	public void setProductCounter(int productCounter) {
+		// TODO Auto-generated method stub
+		this.productCounter.setText(""+productCounter);
+	}
+	
+	public JLabel getLabel() {
+		return productCounter;
 	}
 }
+

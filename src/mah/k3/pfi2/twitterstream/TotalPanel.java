@@ -28,7 +28,7 @@ public class TotalPanel extends JPanel {
 				TitledBorder.TOP, null, null));
 		setLayout(new GridLayout(1, 0, 0, 0));
 		
-		totalCounter = new JLabel("");
+		totalCounter = new JLabel("...");
 		add(totalCounter);
 
 	}
@@ -48,6 +48,7 @@ public class TotalPanel extends JPanel {
 		// TODO Auto-generated method stub
 		this.totalCounter.setText(""+totalCounter);
 	}
+	
 	public JLabel getLabel() {
 		return totalCounter;
 	}
