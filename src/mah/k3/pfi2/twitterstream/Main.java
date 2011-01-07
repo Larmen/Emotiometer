@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import emotiometer.control.Constant;
 import emotiometer.control.Counter;
 import emotiometer.control.DateUtils;
+import emotiometer.visuals.About;
 
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
@@ -30,6 +31,9 @@ import java.awt.Color;
 import javax.swing.border.MatteBorder;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 @SuppressWarnings("serial")
 public class Main extends JFrame implements StatusListener {
@@ -56,6 +60,12 @@ public class Main extends JFrame implements StatusListener {
 	private NegativePanel negativePanel;
 	private PositivePanel positivePanel;
 	private ProductPanel productPanel;
+	private JMenuBar menuBar;
+	private JMenu mnFile;
+	
+	private About about;
+	
+	
 
 	/**
 	 * Launch the application.
@@ -79,7 +89,35 @@ public class Main extends JFrame implements StatusListener {
 	public Main() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 785, 536);
+		setBounds(100, 100, 785, 556);
+		
+		about = new About();
+		
+		menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		mnFile = new JMenu("File");
+		menuBar.add(mnFile);
+		
+		JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
+		mnFile.add(mntmExit);
+		
+		JMenu mnHelp = new JMenu("Help");
+		menuBar.add(mnHelp);
+		
+		JMenuItem mntmAbout = new JMenuItem("About");
+		mntmAbout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				about.setVisible(true);
+				
+			}
+		});
+		mnHelp.add(mntmAbout);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -129,6 +167,11 @@ public class Main extends JFrame implements StatusListener {
 		});
 
 		JButton btnAbout = new JButton("ABOUT");
+		btnAbout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				about.setVisible(true);
+			}
+		});
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null,

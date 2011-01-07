@@ -91,6 +91,7 @@ public class GraphicPanel extends PApplet {
 		PImage S = loadImage("smiley.jpg"); // frowny face
 		image((S), width / 2 + 150, 95);
 
+		/*
 		stroke(0); // grafik för knapp 1.
 		fill(255);
 		rectMode(CORNER);
@@ -98,6 +99,8 @@ public class GraphicPanel extends PApplet {
 		fill(0);
 		textAlign(CENTER);
 		text("GET TWEETS", width / 2, 197);
+		* Commented out for cleanliness in the graphics. AL 7/1
+		*/
 
 		markers[0].display();
 
