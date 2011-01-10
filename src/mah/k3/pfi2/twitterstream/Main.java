@@ -39,7 +39,7 @@ import javax.swing.JMenuItem;
 public class Main extends JFrame implements StatusListener {
 
 	private JPanel contentPane;
-	private TotalPanel totalPanel;
+
 	private LoginPanel loginPanel;
 	// Two strings added, AL 23/12
 	private String tweetContents;
@@ -52,14 +52,14 @@ public class Main extends JFrame implements StatusListener {
 	private boolean running = true;
 	private GraphicPanel graphicPanel;
 
-	/*
-	 * For the panels, Strings made out of integers. AL 4/1
-	 */
+	
 	private int totalTweetInt;
 	public String totalTweets;
+	private TotalPanel totalPanel;
 	private NegativePanel negativePanel;
 	private PositivePanel positivePanel;
 	private ProductPanel productPanel;
+	private TimePanel timePanel;
 	private JMenuBar menuBar;
 	private JMenu mnFile;
 	
@@ -124,6 +124,7 @@ public class Main extends JFrame implements StatusListener {
 
 
 		loginPanel = new LoginPanel();
+		loginPanel.getButton().setText("Start Emotiometer");
 		loginPanel.getPasswordField().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				readTweets();
@@ -138,12 +139,14 @@ public class Main extends JFrame implements StatusListener {
 
 
 		totalPanel = new TotalPanel();
+		totalPanel.getLabel().setToolTipText("Total number of tweets in the stream");
 
 		negativePanel = new NegativePanel();
 
 		positivePanel = new PositivePanel();
 
 		productPanel = new ProductPanel();
+		productPanel.getLabel().setToolTipText("Number of tweets containing the product name");
 
 		/*
 		 * Below is the start & stop function for the tweet stream. The button
@@ -151,25 +154,20 @@ public class Main extends JFrame implements StatusListener {
 		 * method onStatus further below. AL 4/1
 		 */
 		JButton btnStartStop = new JButton("START / STOP");
+		btnStartStop.setToolTipText("Start or stop the reading of the feed");
 		btnStartStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (running == false) {
 					running = true;
+					dateTime = dateUtil.now();
 				} else if (running == true) {
 					running = false;
 				}
-				dateTime = dateUtil.now();
+				
 				/*
-				 * This updates the date & time to reflect when the stream has
+				 * This thing above updates the date & time to reflect when the stream has
 				 * been started/stopped. AL 4/1
 				 */
-			}
-		});
-
-		JButton btnAbout = new JButton("ABOUT");
-		btnAbout.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				about.setVisible(true);
 			}
 		});
 
@@ -178,6 +176,9 @@ public class Main extends JFrame implements StatusListener {
 				null));
 		FlowLayout flowLayout_1 = (FlowLayout) panel.getLayout();
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
+		
+		timePanel = new TimePanel();
+		timePanel.getLabel().setToolTipText("Time that the reading of the Twitter feed initiated");
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -185,7 +186,7 @@ public class Main extends JFrame implements StatusListener {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
+						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(negativePanel, GroupLayout.PREFERRED_SIZE, 240, GroupLayout.PREFERRED_SIZE)
@@ -195,14 +196,12 @@ public class Main extends JFrame implements StatusListener {
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(totalPanel, GroupLayout.PREFERRED_SIZE, 274, GroupLayout.PREFERRED_SIZE)
-								.addComponent(productPanel, GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE))
+								.addComponent(productPanel, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(positivePanel, GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(btnAbout, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
-									.addGap(46))))
-						.addComponent(loginPanel, GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(timePanel, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
+								.addComponent(positivePanel, GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)))
+						.addComponent(loginPanel, GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
@@ -210,8 +209,8 @@ public class Main extends JFrame implements StatusListener {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 262, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(productPanel, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED))
@@ -219,8 +218,8 @@ public class Main extends JFrame implements StatusListener {
 							.addComponent(btnStartStop)
 							.addGap(27))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btnAbout)
-							.addGap(28)))
+							.addComponent(timePanel, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)))
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(totalPanel, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
 						.addComponent(negativePanel, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
@@ -333,18 +332,11 @@ public class Main extends JFrame implements StatusListener {
 			System.out.println(tweetLowerCase); // Good for copying and pasting
 												// when testing
 
-			// Counting test, casting the integer to String
-			totalTweetInt = mainCounter.getTotalCounter();
-			totalTweets = String.valueOf(totalTweetInt);
+			
 
 			checkTweetProd();
 
-			//getStreamPanel().getTextArea().append(sb.toString());
-			/*
-			 * getTotalPanel().getTextTotal().append(totalTweets.toString());
-			 * 
-			 * This doesn't work, I get a Thread exception error. AL 4/1
-			 */
+			
 		}
 	}
 
@@ -356,8 +348,8 @@ public class Main extends JFrame implements StatusListener {
 
 	/*
 	 * Added to check if tweets contain the Prodnames defined in the Constant
-	 * class. We'll have to do a workaround to get the Constant-variable in here
-	 * though
+	 * class.
+	 * We get the product name in here through the instantiation of the Constant class: mainConstant
 	 */
 	public void checkTweetProd() {
 
@@ -375,14 +367,16 @@ public class Main extends JFrame implements StatusListener {
 		 */
 
 		if (index1 != -1) {
-
+			
+			/*Adding +1 tweet to the product category */
 			mainCounter.plusProductCounter();
+			
 
 			for (int i = 0; i < mainConstant.Positive.length; i++) {
 				int indexHappyEmoticon = tweetContents
 						.indexOf(mainConstant.Positive[i]);
 				if (indexHappyEmoticon != -1) {
-					// System.out.println("glad emoticon funnen");
+					//adds +1 to the positive product tweets
 					mainCounter.plusPositiveCounter();
 				}
 
@@ -391,12 +385,45 @@ public class Main extends JFrame implements StatusListener {
 				int indexSadEmoticon = tweetContents
 						.indexOf(mainConstant.Negative[i]);
 				if (indexSadEmoticon != -1) {
-					// System.out.println("suris emoticon funnen");
+					//adds +1 to the negative product tweets
 					mainCounter.plusNegativeCounter();
 				}
 			}
-			// totalPanel.setTotalCounter(mainCounter.getTotalCounter());
+			
+			/*
+			 * Print lines for error checking
+			 * */
+			System.out.println("Positive " + mainCounter.getPositiveCounter());
+			System.out.println("Negative " + mainCounter.getNegativeCounter());
+			System.out.println("Product " + mainCounter.getProductCounter());
+			System.out.println("Total " + mainCounter.getTotalCounter());
+			
+			
+			/*
+			 * Updates the values in the panels for each of our categories.
+			 * */
+			this.positivePanel.getLabel().setText(
+					"" + mainCounter.getPositiveCounter());
+			this.negativePanel.getLabel().setText(
+					"" + mainCounter.getNegativeCounter());
+			this.productPanel.getLabel().setText(
+					"" + mainCounter.getProductCounter());
+			this.totalPanel.getLabel().setText(
+					"" + mainCounter.getTotalCounter());
+			
+			this.timePanel.getLabel().setText(
+					"" + dateTime);
+			
+			/*
+			 * Updates the values for graphicPanel, to amke sure our temperature bar indicator is at
+			 * the correct position
+			 * */
+			this.graphicPanel.setFrowny(mainCounter.getNegativeCounter());
+			this.graphicPanel.setSmiley(mainCounter.getPositiveCounter());
+		}
 
+		else {
+			
 			System.out.println("Positive " + mainCounter.getPositiveCounter());
 			System.out.println("Negative " + mainCounter.getNegativeCounter());
 			System.out.println("Product " + mainCounter.getProductCounter());
@@ -410,24 +437,9 @@ public class Main extends JFrame implements StatusListener {
 			this.totalPanel.getLabel().setText(
 					"" + mainCounter.getTotalCounter());
 			
-			this.graphicPanel.setFrowny(mainCounter.getNegativeCounter());
-			this.graphicPanel.setSmiley(mainCounter.getPositiveCounter());
-		}
-
-		else {
-			System.out.println("xfalse");
-			System.out.println("Positive " + mainCounter.getPositiveCounter());
-			System.out.println("Negative " + mainCounter.getNegativeCounter());
-			System.out.println("Product " + mainCounter.getProductCounter());
-			System.out.println("Total " + mainCounter.getTotalCounter());
-			this.positivePanel.getLabel().setText(
-					"" + mainCounter.getPositiveCounter());
-			this.negativePanel.getLabel().setText(
-					"" + mainCounter.getNegativeCounter());
-			this.productPanel.getLabel().setText(
-					"" + mainCounter.getProductCounter());
-			this.totalPanel.getLabel().setText(
-					"" + mainCounter.getTotalCounter());
+			
+			this.timePanel.getLabel().setText(
+					"" + dateTime);
 
 		}
 

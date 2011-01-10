@@ -22,37 +22,7 @@ import processing.core.*;
  * 
  */
 
-/*public class GraphicPanel extends JPanel {
 
-
-	private JTextArea textArea;
-    
-	//Create the panel.
-
-	public GraphicPanel() {
-		setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null,
-				null), "Thermometer %", TitledBorder.LEADING,
-				TitledBorder.TOP, null, null));
-		setLayout(new GridLayout(1, 0, 0, 0));
-
-		JScrollPane scrollPane = new JScrollPane();
-		// add(scrollPane);
-
-		textArea = new JTextArea();
-		textArea.setEditable(false);
-		scrollPane.setViewportView(textArea);
-
-	}
-
-	public JTextArea getTextArea() {
-		return textArea;
-	}
-}
-*/
-
-/* tryck på rutan i övre högra hörnet, då slumpas ett tal för smilies 
-respektive frownies. De delas genom sig själva ((s/f+s)+(f/f+s)/2). ut får man en 
-jämkning av procentsatserna som visas längs status-baren.*/
 
 
 public class GraphicPanel extends PApplet {
@@ -130,14 +100,7 @@ public class GraphicPanel extends PApplet {
 
 	}
 
-	public void mousePressed() { // funktion för knapp 1, slumpar värden för
-									// smilies & frownies.
-		if (mouseX > width / 2 - 42 && mouseX < width / 2 + 42 && mouseY > 180
-				&& mouseY < 208) {
-			frowny = random(100); // Här skall värdena från tweetlistener in
-			smiley = random(100); // Här skall värdena från tweetlistener in
-		}
-	}
+
 
 	public void setFrowny(int frowny) {
 		this.frowny = frowny;
