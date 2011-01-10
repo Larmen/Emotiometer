@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="data/gradient emoticons.jpg"/>
 	<classpathentry kind="lib" path="data/smiley.jpg"/>
 	<classpathentry kind="lib" path="data/tronemotiometer.jpg"/>
+	<classpathentry kind="lib" path="data/Emotionlogo.png"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

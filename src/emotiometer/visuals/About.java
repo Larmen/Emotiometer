@@ -47,7 +47,7 @@ public class About extends JDialog {
 		
 		JLabel label = new JLabel("");
 		label.setBackground(Color.WHITE);
-		label.setIcon(new ImageIcon("C:\\Users\\anders\\workspace\\Emotiometer\\data\\about.png"));
+		label.setIcon(new ImageIcon("/Users/mikaelericsson/Documents/Eclipse/workspace/Emotiometer/data/Emotionlogo.png"));
 		
 		JLabel lblTronEmotiometer = new JLabel("Tron Emotiometer 2011");
 		lblTronEmotiometer.setFont(new Font("Tahoma", Font.PLAIN, 12));

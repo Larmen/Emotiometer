@@ -42,7 +42,7 @@ public class GraphicPanel extends PApplet {
 	public void setup() {
 		size(750, 250);
 
-		markers[0] = new Marker(color (0,0,0),0,158);
+		markers[0] = new Marker(color (255,255,255),0,150);
 	}
 
 	public void draw() {
@@ -50,16 +50,16 @@ public class GraphicPanel extends PApplet {
 		// println(mouseX + " " + mouseY); //skriver ut musens placering för
 		// enklare programmering
 
-		background(255);
+		background(0);
 		PImage I = loadImage("tronemotiometer.jpg"); // banner logo on top
-		image((I), 10, 0);
+		image((I), 8, 10);
 		PImage G = loadImage("gradient emoticons.jpg"); // gradient status bar,
 														// x=200pxl, y=25pxl.
-		image((G), width / 2 - 100, 145);
+		image((G), width / 2 - 230, 125);
 		PImage F = loadImage("frowny.jpg"); // frowny face
-		image((F), width / 2 - 250, 93);
+		image((F), width / 2 - 340, 110);
 		PImage S = loadImage("smiley.jpg"); // frowny face
-		image((S), width / 2 + 150, 95);
+		image((S), width / 2 + 265, 110);
 
 		/*
 		stroke(0); // grafik för knapp 1.
@@ -77,7 +77,7 @@ public class GraphicPanel extends PApplet {
 	}
 
 	class Marker {
-		int c;
+		// int c;
 		float xpos;
 		float ypos;
 
@@ -90,11 +90,11 @@ public class GraphicPanel extends PApplet {
 
 		void display() {
 
-			xpos = (width / 2) - 100 + (smiley / (smiley + frowny)) * 200;
-			stroke(0);
-			fill(c);
+			xpos = (width / 2) - 230 + (smiley / (smiley + frowny)) * 460;
+			stroke(255);
+			fill(255);
 			rectMode(CENTER);
-			rect(xpos, ypos, 1, 32);
+			rect(xpos, ypos, 2, 75);
 			//println(smiley + "smiley" + frowny + "frowny");
 		}
 
