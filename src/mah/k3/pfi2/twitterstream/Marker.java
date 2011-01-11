@@ -11,9 +11,7 @@ public class Marker {
 	PApplet parent; // The parent PApplet that we will render ourselves onto
 
 	Marker(PApplet p) {
-	//	parent = p;
-		frowny = 45;//random (100); //Här skall värdena från tweetlistener in
-	    smiley = 2; //random (100); //Här skall värdena från tweetlistener in
+	
 	}		  
 	
 }

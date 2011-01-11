@@ -47,7 +47,7 @@ public class About extends JDialog {
 		
 		JLabel label = new JLabel("");
 		label.setBackground(Color.WHITE);
-		label.setIcon(new ImageIcon("/Users/mikaelericsson/Documents/Eclipse/workspace/Emotiometer/data/Emotionlogo.png"));
+		label.setIcon(new ImageIcon(About.class.getResource("/emotiometer/visuals/Emotionlogo.png")));
 		
 		JLabel lblTronEmotiometer = new JLabel("Tron Emotiometer 2011");
 		lblTronEmotiometer.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -86,40 +86,39 @@ public class About extends JDialog {
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(label)
+					.addComponent(label, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(18)
+							.addGap(35)
+							.addComponent(lblWwwtronlegacycom))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblCreatedForThe, GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-								.addComponent(lblForInteractionDesign, GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+								.addComponent(lblCreatedForThe, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(lblForInteractionDesign, GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+								.addComponent(lblTronEmotiometer, GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
 								.addComponent(lblAuthors)
 								.addComponent(lblAlanCheng)
 								.addComponent(lblJohanPalm)
 								.addComponent(lblAndersLarm)
 								.addComponent(lblJasminGhoreishi)
 								.addComponent(lblMikaelEricssonDuffy)
-								.addComponent(lblJohannesNilsson)
-								.addComponent(lblTronEmotiometer, GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(48)
-							.addComponent(lblWwwtronlegacycom)))
+								.addComponent(lblJohannesNilsson))))
 					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(label, GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(label, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(lblTronEmotiometer)
 							.addGap(15)
 							.addComponent(lblCreatedForThe)
 							.addGap(3)
 							.addComponent(lblForInteractionDesign)
-							.addGap(21)
+							.addGap(18)
 							.addComponent(lblAuthors)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblAlanCheng)
@@ -133,7 +132,7 @@ public class About extends JDialog {
 							.addComponent(lblJohannesNilsson)
 							.addGap(2)
 							.addComponent(lblJohanPalm)
-							.addPreferredGap(ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
 							.addComponent(lblWwwtronlegacycom)))
 					.addContainerGap())
 		);

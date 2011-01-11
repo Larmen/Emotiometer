@@ -47,9 +47,7 @@ public class GraphicPanel extends PApplet {
 
 	public void draw() {
 
-		// println(mouseX + " " + mouseY); //skriver ut musens placering för
-		// enklare programmering
-
+		
 		background(0);
 		PImage I = loadImage("tronemotiometer.jpg"); // banner logo on top
 		image((I), 8, 10);
@@ -61,16 +59,7 @@ public class GraphicPanel extends PApplet {
 		PImage S = loadImage("smiley.jpg"); // frowny face
 		image((S), width / 2 + 265, 110);
 
-		/*
-		stroke(0); // grafik för knapp 1.
-		fill(255);
-		rectMode(CORNER);
-		rect(width / 2 - 42, 180, 84, 28);
-		fill(0);
-		textAlign(CENTER);
-		text("GET TWEETS", width / 2, 197);
-		* Commented out for cleanliness in the graphics. AL 7/1
-		*/
+		
 
 		markers[0].display();
 
@@ -95,7 +84,7 @@ public class GraphicPanel extends PApplet {
 			fill(255);
 			rectMode(CENTER);
 			rect(xpos, ypos, 2, 75);
-			//println(smiley + "smiley" + frowny + "frowny");
+			
 		}
 
 	}
